@@ -21,6 +21,8 @@ print((c3+1)*c1)
 
 # part 2
 
+adapters = [0] + adapters
+
 runs = []
 currentrun = 0
 for i in range(1, len(adapters)):
@@ -52,3 +54,4 @@ for r in runs:
 	total *= countruns(1, r, [1])
 	
 print(total)
+
