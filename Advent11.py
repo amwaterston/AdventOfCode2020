@@ -17,7 +17,7 @@ class Seat:
 				occCount += 1
 		if not self.isOccupied and occCount == 0:
 			self.willBeOccupied = True
-		elif self.isOccupied and occCount >= 4:
+		elif self.isOccupied and occCount >= 5:
 			self.willBeOccupied = False
 			
 	def tick(self):
@@ -39,10 +39,10 @@ class SeatMap:
 		for y in range(height):
 			for x in range(width):
 				if (lines[y][x] == "L"):
-					adseats = self.findAdjacents(x, y, lines)
+					adseats = self.findLineOfSightSeats(x, y, lines)
 					for s in adseats:
 						self.seatmap[(x, y)].adjacentseats.append(self.seatmap[s[0], s[1]])
-					print (f"counted {len(self.seatmap[(x, y)].adjacentseats)} adjacent seats")
+					#print (f"counted {len(self.seatmap[(x, y)].adjacentseats)} adjacent seats")
 						
 		
 					
@@ -52,7 +52,7 @@ class SeatMap:
 		for d in diffs:
 			cy = y + d[1]
 			cx = x + d[0]
-			if cx >= 0 and cy >= 0 and cx < width and cy < width and lines[cy][cx] == "L":
+			if cx >= 0 and cy >= 0 and cx < width and cy < height and lines[cy][cx] == "L":
 				seats.append((cx, cy))
 		return seats
 		
@@ -62,7 +62,7 @@ class SeatMap:
 		for d in diffs:
 			cy = y + d[1]
 			cx = x + d[0]
-			while (cx >= 0 and cy >= 0 and cx < width and cy < width):
+			while (cx >= 0 and cy >= 0 and cx < width and cy < height):
 				if (lines[cy][cx] == "L"):
 					seats.append((cx, cy))
 					break
