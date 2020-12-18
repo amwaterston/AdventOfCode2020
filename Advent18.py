@@ -1,0 +1,3 @@
+class ShuntingYard:
+	outputstack = []
+	opstack = []
